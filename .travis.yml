@@ -1,3 +1,9 @@
 language: python
 
-script: exit 0
+install:
+    - pip install -r requirements/base.txt
+    - pip install -r requirements/test.txt
+
+script:
+    - pylint django_mysql_retry_init
+    - pycodestyle django_mysql_retry_init
