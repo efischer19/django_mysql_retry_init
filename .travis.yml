@@ -7,3 +7,7 @@ install:
 script:
     - pylint django_mysql_retry_init
     - pycodestyle django_mysql_retry_init
+    - coverage run --source=django_mysql_retry_init --branch django_mysql_retry_init/__init__.py
+
+after_success:
+    coveralls
