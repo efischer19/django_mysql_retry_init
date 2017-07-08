@@ -1,2 +1,8 @@
 # django_mysql_retry_init
-Django mysql backend extension that will wait-and-retry when making the initial connection
+
+Django backend extension implementing the recommendations at
+https://docs.docker.com/compose/startup-order/ for the case of a
+django application using MySQL.
+
+This is for startup only, I make no attempt at dealing with lost
+connections during operation.
