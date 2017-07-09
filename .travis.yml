@@ -1,17 +1,37 @@
 language: python
+python:
+    - 2.7
+    - 3.3
+    - 3.4
+    - 3.5
+    - 3.6
+
+cache: pip
+
+env:
+    - TOXENV=django18
+    - TOXENV=django110
+    - TOXENV=django111
+
+matrix:
+    exclude:
+    - python: 3.6
+      env: TOXENV=django18
+    - python: 3.3
+      env: TOXENV=django110
+    - python: 3.6
+      env: TOXENV=django110
+    - python: 3.3
+      env: TOXENV=django111
+    include:
+    - python: 3.6
+      env: TOXENV=quality
 
 install:
-    - pip install -r requirements/base.txt
     - pip install -r requirements/test.txt
 
-script:
-    - pylint django_mysql_retry_init
-    - pycodestyle django_mysql_retry_init
-    - echo "import django_mysql_retry_init" > meow.py
-    - coverage run --source=django_mysql_retry_init --branch meow.py
-
-after_success:
-    coveralls
+script: tox
+after_success: coveralls
 
 notifications:
       email: false
